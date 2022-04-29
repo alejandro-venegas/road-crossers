@@ -1,13 +1,13 @@
 <script lang="ts">
 	import * as SC from 'svelte-cubed';
 	import * as THREE from 'three';
+	import { OrbitControls } from 'svelte-cubed';
 
 	import Map from '$lib/Map.svelte';
-	import { points } from '$lib/Player.js';
-
-	import Road from '../lib/Road.svelte';
-	import { OrbitControls } from 'svelte-cubed';
-	import Player from '../lib/Player.svelte';
+	import { points } from '$lib/Player.ts';
+	import Road from '$lib/Road.svelte';
+	import Player from '$lib/Player.svelte';
+	import { isOver } from '$lib/Game.ts';
 
 	let screenWidth;
 	let screenHeight;
@@ -53,23 +53,64 @@
 	/>
 	<OrbitControls />
 </SC.Canvas>
+{#if $isOver}
+	<article class="game-over-dialog box">
+		<h1>Game Over</h1>
+	</article>
+{/if}
 
 <div class="controls">
-	<h2>Controls</h2>
-	<p>Up: [↑]</p>
-	<p>Down: [↓]</p>
-	<p>Points: {$points}</p>
+	<article class="box section points">
+		<h2>Points</h2>
+		<p>{$points}</p>
+	</article>
+	<article class="box section">
+		<h2>Controls</h2>
+		<p>Forwards: [↑]</p>
+		<p>Backwards: [↓]</p>
+		<p>POV: Left Click + Drag</p>
+		<p>Camera: Right Click + Drag</p>
+		<p>Zoom: Scroll</p>
+	</article>
 </div>
 
 <style>
 	* {
 		font-family: sans-serif;
 	}
-	.controls {
+
+	.box {
 		padding: 10px;
+		background-color: rgba(255, 255, 255, 0.5);
+		border-radius: 16px;
+	}
+	.controls {
 		position: absolute;
 		top: 10px;
 		right: 10px;
-		background-color: rgba(255, 255, 255, 0.5);
+		display: flex;
+		align-items: flex-start;
+	}
+	.controls .section {
+		margin: 0.5rem;
+	}
+	.points {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.points p {
+		font-size: 2rem;
+		margin: 0;
+	}
+
+	.game-over-dialog {
+		position: absolute;
+		top: 2rem;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	.game-over-dialog h1 {
+		font-size: 2rem;
 	}
 </style>
