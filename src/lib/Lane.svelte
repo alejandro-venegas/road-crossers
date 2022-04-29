@@ -4,7 +4,7 @@
 	import { nanoid } from 'nanoid';
 
 	import Car from './Car.svelte';
-	import { points } from '$lib/Player.js';
+	import { points } from '$lib/Player.ts';
 
 	export let cameraWidth: number;
 	export let position: number[];
@@ -17,7 +17,6 @@
 	let maxInterval = 1500;
 
 	$: maxInterval -= $points - $points + 20;
-	$: console.log(maxInterval);
 
 	function randomIntFromInterval(min, max) {
 		return Math.floor(Math.random() * (max - min + 1) + min);
@@ -51,6 +50,12 @@
 		receiveShadow
 	/>
 	{#each cars as car (car.id)}
-		<svelte:component this={car.component} {cameraWidth} {velocity} on:remove={removeCar} />
+		<svelte:component
+			this={car.component}
+			{cameraWidth}
+			{velocity}
+			globalZ={position[2]}
+			on:remove={removeCar}
+		/>
 	{/each}
 </SC.Group>

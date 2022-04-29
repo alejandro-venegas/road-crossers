@@ -2,12 +2,15 @@
 	import * as SC from 'svelte-cubed';
 	import * as THREE from 'three';
 
-	import { points } from '$lib/Player.js';
+	import { points, position, width } from '$lib/Player.ts';
+	import { isOver } from './Game';
 
 	const zInit = 50;
-	const playerRadius = 10;
+	const playerDimension = 20;
 	const playerVelocity = 2.5;
 	const targetFromCenter = 50;
+
+	$width = playerDimension;
 
 	let z = zInit;
 
@@ -20,13 +23,17 @@
 	}
 
 	SC.onFrame(() => {
+		if ($isOver) {
+			return;
+		}
 		if (keysState['ArrowUp']) {
 			z -= playerVelocity;
 		} else if (keysState['ArrowDown']) {
 			z += playerVelocity;
 		}
+		$position = { x: 0, y: 0, z };
 
-		if (target * (z - playerRadius) >= targetFromCenter) {
+		if (target * (z + (target * playerDimension) / 2) >= targetFromCenter) {
 			$points += 1;
 			target = -target;
 		}
@@ -40,7 +47,11 @@
 
 <SC.Mesh
 	position={[0, 10, z]}
-	geometry={new THREE.SphereBufferGeometry(playerRadius)}
+	geometry={new THREE.BoxBufferGeometry(
+		playerDimension,
+		playerDimension,
+		playerDimension
+	)}
 	material={new THREE.MeshLambertMaterial({ color: 0xffffff })}
 	castShadow
 />
