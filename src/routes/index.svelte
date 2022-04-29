@@ -2,13 +2,12 @@
 	import * as SC from 'svelte-cubed';
 	import * as THREE from 'three';
 
-	import { nanoid } from 'nanoid';
-
-	import Car from '$lib/Car.svelte';
 	import Map from '$lib/Map.svelte';
-	import { OrbitControls } from 'svelte-cubed';
-	import Lane from '../lib/Lane.svelte';
+	import { points } from '$lib/Player.js';
+
 	import Road from '../lib/Road.svelte';
+	import { OrbitControls } from 'svelte-cubed';
+	import Player from '../lib/Player.svelte';
 
 	let screenWidth;
 	let screenHeight;
@@ -17,9 +16,6 @@
 	let cameraHeight;
 
 	$: calculateAspectRatio(screenWidth, screenHeight);
-
-	let canvas;
-	let lightTick = 0;
 
 	function calculateAspectRatio(screenWidth, screenHeight) {
 		cameraWidth = screenWidth / 2;
@@ -33,6 +29,8 @@
 
 <SC.Canvas antialias width={screenWidth} height={screenHeight} shadows>
 	<Map width={screenWidth} height={screenHeight} />
+
+	<Player />
 
 	<Road {cameraWidth} />
 
@@ -55,3 +53,23 @@
 	/>
 	<OrbitControls />
 </SC.Canvas>
+
+<div class="controls">
+	<h2>Controls</h2>
+	<p>Up: [↑]</p>
+	<p>Down: [↓]</p>
+	<p>Points: {$points}</p>
+</div>
+
+<style>
+	* {
+		font-family: sans-serif;
+	}
+	.controls {
+		padding: 10px;
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		background-color: rgba(255, 255, 255, 0.5);
+	}
+</style>
