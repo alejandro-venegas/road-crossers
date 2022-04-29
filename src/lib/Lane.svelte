@@ -4,11 +4,13 @@
 	import { nanoid } from 'nanoid';
 	import Car from './Car.svelte';
 
-	export let cameraWidth;
+	export let cameraWidth: number;
+	export let position: number[];
+	export let rotation: number[];
 
 	let cars = [{ id: nanoid(), component: Car }];
 
-	const velocity = 3;
+	const velocity = 2;
 
 	function randomIntFromInterval(min, max) {
 		return Math.floor(Math.random() * (max - min + 1) + min);
@@ -31,7 +33,7 @@
 	}
 </script>
 
-<SC.Group>
+<SC.Group {position} {rotation}>
 	<SC.Mesh
 		geometry={new THREE.PlaneGeometry(cameraWidth * 2, 40)}
 		material={new THREE.MeshStandardMaterial({ color: 0x444447 })}

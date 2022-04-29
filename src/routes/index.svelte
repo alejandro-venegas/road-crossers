@@ -8,6 +8,7 @@
 	import Map from '$lib/Map.svelte';
 	import { OrbitControls } from 'svelte-cubed';
 	import Lane from '../lib/Lane.svelte';
+	import Road from '../lib/Road.svelte';
 
 	let screenWidth;
 	let screenHeight;
@@ -33,7 +34,7 @@
 <SC.Canvas antialias width={screenWidth} height={screenHeight} shadows>
 	<Map width={screenWidth} height={screenHeight} />
 
-	<Lane {cameraWidth} />
+	<Road {cameraWidth} />
 
 	<SC.AmbientLight color={0xffffff} intensity="0.6" />
 	<SC.DirectionalLight
