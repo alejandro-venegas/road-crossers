@@ -4,7 +4,7 @@
 	import { createEventDispatcher } from 'svelte';
 
 	export let cameraWidth;
-	export let index;
+	export let velocity;
 
 	const dispatch = createEventDispatcher();
 
@@ -17,12 +17,12 @@
 	let x;
 
 	SC.onFrame(() => {
-		xOffset += 0.5;
-		x = xInit + xOffset * 5;
-
 		if (xInit >= -x) {
-			dispatch('remove', { index });
+			dispatch('remove');
+			return;
 		}
+		xOffset += 1;
+		x = xInit + xOffset * velocity;
 	});
 </script>
 

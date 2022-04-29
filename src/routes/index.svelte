@@ -7,14 +7,13 @@
 	import Car from '$lib/Car.svelte';
 	import Map from '$lib/Map.svelte';
 	import { OrbitControls } from 'svelte-cubed';
+	import Lane from '../lib/Lane.svelte';
 
 	let screenWidth;
 	let screenHeight;
 	let aspectRatio;
 	let cameraWidth;
 	let cameraHeight;
-
-	let cars = [];
 
 	$: calculateAspectRatio(screenWidth, screenHeight);
 
@@ -27,16 +26,6 @@
 		aspectRatio = screenWidth / screenHeight;
 		cameraHeight = cameraWidth / aspectRatio;
 	}
-
-	setInterval(() => {
-		cars = [...cars, { id: nanoid(), component: Car }];
-	}, 1000);
-
-	function removeCar() {
-		cars.splice(0, 1);
-
-		cars = cars;
-	}
 </script>
 
 <svelte:window bind:innerWidth={screenWidth} bind:innerHeight={screenHeight} />
@@ -44,9 +33,7 @@
 <SC.Canvas antialias width={screenWidth} height={screenHeight} shadows>
 	<Map width={screenWidth} height={screenHeight} />
 
-	{#each cars as car (car.id)}
-		<svelte:component this={car.component} {cameraWidth} on:remove={() => removeCar()} />
-	{/each}
+	<Lane {cameraWidth} />
 
 	<SC.AmbientLight color={0xffffff} intensity="0.6" />
 	<SC.DirectionalLight
