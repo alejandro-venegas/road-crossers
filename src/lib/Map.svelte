@@ -11,7 +11,7 @@
 		geometry={new THREE.PlaneGeometry(width * 2, height * 2)}
 		material={new THREE.MeshStandardMaterial({ color: 0x00cc00 })}
 		rotation={[(-90 * Math.PI) / 180, 0, 0]}
-		receiveShadow={true}
+		receiveShadow
 	/>
 	<SC.Primitive
 		object={new THREE.GridHelper(width, 30, 0x444444, 0x555555)}

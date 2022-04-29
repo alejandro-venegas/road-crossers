@@ -31,20 +31,28 @@
 		geometry={new THREE.BoxBufferGeometry(10, 10, 36)}
 		material={new THREE.MeshStandardMaterial({ color: 0x333333 })}
 		position={[-18, 5, 0]}
+		castShadow
+		receiveShadow
 	/>
 	<SC.Mesh
 		geometry={new THREE.BoxBufferGeometry(10, 10, 36)}
 		material={new THREE.MeshStandardMaterial({ color: 0x333333 })}
 		position={[18, 5, 0]}
+		castShadow
+		receiveShadow
 	/>
 	<SC.Mesh
 		geometry={new THREE.BoxBufferGeometry(70, 15, 30)}
 		material={new THREE.MeshStandardMaterial({ color: vehicleColors[colorIndex] })}
 		position={[0, 10, 0]}
+		castShadow
+		receiveShadow
 	/>
 	<SC.Mesh
 		geometry={new THREE.BoxBufferGeometry(40, 12, 25)}
 		material={new THREE.MeshStandardMaterial({ color: 0xc8d7e0 })}
 		position={[-5, 22, 0]}
+		castShadow
+		receiveShadow
 	/>
 </SC.Group>
