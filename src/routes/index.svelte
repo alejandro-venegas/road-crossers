@@ -54,7 +54,7 @@
 		intensity="0.6"
 		position={[100, 300, 450]}
 		shadow={{ mapSize: [2048, 2048] }}
-	/>s
+	/>
 	<SC.OrthographicCamera
 		left={cameraWidth / -2}
 		right={cameraWidth / 2}
