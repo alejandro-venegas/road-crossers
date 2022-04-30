@@ -12,9 +12,14 @@
 
 	$width = playerDimension;
 
-	let z = zInit;
+	let z;
+	let target;
 
-	let target = -1;
+	function setPlayer() {
+		z = zInit;
+		target = -1;
+	}
+	setPlayer();
 
 	const keysState = {};
 
@@ -38,6 +43,14 @@
 			target = -target;
 		}
 	});
+
+	function onIsOverChange(restart: boolean) {
+		if (restart) {
+			setPlayer();
+		}
+	}
+
+	$: onIsOverChange(!$isOver);
 </script>
 
 <svelte:window

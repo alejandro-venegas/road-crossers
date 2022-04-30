@@ -5,16 +5,27 @@
 
 	import Car from './Car.svelte';
 	import { points } from '$lib/Player.ts';
+	import { isOver } from './Game';
 
 	export let cameraWidth: number;
 	export let position: number[];
 	export let rotation: number[];
 
 	const velocity = 2;
+	const initMinInterval = 400;
+	const initMaxInterval = 1500;
 
-	let cars = [];
-	let minInterval = 400;
-	let maxInterval = 1500;
+	let cars;
+	let minInterval;
+	let maxInterval;
+
+	function setLane() {
+		cars = [];
+		minInterval = initMinInterval;
+		maxInterval = initMaxInterval;
+	}
+
+	setLane();
 
 	$: maxInterval -= $points - $points + 20;
 
@@ -31,6 +42,9 @@
 	let lastDate = new Date();
 	let interval = 0;
 	SC.onFrame(() => {
+		if (!isOver) {
+			return;
+		}
 		const currentDate = new Date();
 		if (currentDate - lastDate >= interval) {
 			interval = randomIntFromInterval(minInterval, maxInterval);
@@ -39,6 +53,13 @@
 			cars = [...cars, { id: nanoid(), component: Car }];
 		}
 	});
+
+	function onIsOverChange(restart: boolean) {
+		if (restart) {
+			setLane();
+		}
+	}
+	$: onIsOverChange(!$isOver);
 </script>
 
 <SC.Group {position} {rotation}>

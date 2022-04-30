@@ -24,6 +24,11 @@
 		aspectRatio = screenWidth / screenHeight;
 		cameraHeight = cameraWidth / aspectRatio;
 	}
+
+	function onRestartClick() {
+		$isOver = false;
+		$points = 0;
+	}
 </script>
 
 <svelte:window bind:innerWidth={screenWidth} bind:innerHeight={screenHeight} />
@@ -57,7 +62,7 @@
 {#if $isOver}
 	<article class="game-over-dialog box">
 		<h1>Game Over</h1>
-		<Button>RESTART</Button>
+		<Button on:click={onRestartClick}>RESTART</Button>
 	</article>
 {/if}
 

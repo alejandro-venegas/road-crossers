@@ -1,4 +1,14 @@
-<span class="start-btn"><slot /></span>
+<script>
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
+
+	function click() {
+		dispatch('click');
+	}
+</script>
+
+<span on:click={click} class="start-btn"><slot /></span>
 
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
