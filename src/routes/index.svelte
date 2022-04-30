@@ -8,6 +8,7 @@
 	import Road from '$lib/Road.svelte';
 	import Player from '$lib/Player.svelte';
 	import { isOver } from '$lib/Game.ts';
+	import Button from '../lib/Button.svelte';
 
 	let screenWidth;
 	let screenHeight;
@@ -56,6 +57,7 @@
 {#if $isOver}
 	<article class="game-over-dialog box">
 		<h1>Game Over</h1>
+		<Button>RESTART</Button>
 	</article>
 {/if}
 
@@ -109,6 +111,9 @@
 		top: 2rem;
 		left: 50%;
 		transform: translateX(-50%);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 	.game-over-dialog h1 {
 		font-size: 2rem;
