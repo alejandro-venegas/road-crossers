@@ -8,6 +8,12 @@ const config = {
 	preprocess: preprocess(),
 
 	kit: {
+		vite: {
+			ssr: {
+				noExternal: ['three']
+			}
+		},
+
 		adapter: adapter(),
 
 		// Override http methods in the Todo forms
