@@ -1,7 +1,6 @@
 <script lang="ts">
 	import * as SC from 'svelte-cubed';
 	import * as THREE from 'three';
-	import { OrbitControls } from 'svelte-cubed';
 
 	import Map from '$lib/Map.svelte';
 	import { points } from '$lib/Player.ts';
@@ -57,7 +56,7 @@
 		far={20000}
 		near={0}
 	/>
-	<OrbitControls />
+	<SC.OrbitControls />
 </SC.Canvas>
 {#if $isOver}
 	<article class="game-over-dialog box">
