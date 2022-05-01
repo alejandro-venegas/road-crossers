@@ -31,7 +31,9 @@
 </script>
 
 <svelte:window bind:innerWidth={screenWidth} bind:innerHeight={screenHeight} />
-
+<svelte:head>
+	<title>Road Crossers</title>
+</svelte:head>
 <SC.Canvas antialias width={screenWidth} height={screenHeight} shadows>
 	<Map width={screenWidth} height={screenHeight} />
 
